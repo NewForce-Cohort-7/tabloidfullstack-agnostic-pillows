@@ -21,8 +21,14 @@ const CategoryProvider = (props) => {
     }).then(getAllCategories);
   };
 
+  const deleteCategory = (categoryId) => {
+    return fetch(`/api/Category/${categoryId}`, {
+      method: "DELETE",
+    }).then(getAllCategories);
+  };
+
   return (
-    <CategoryContext.Provider value={{ categories, getAllCategories, addCategory }}>
+    <CategoryContext.Provider value={{ categories, getAllCategories, addCategory, deleteCategory }}>
       {props.children}
     </CategoryContext.Provider>
   );

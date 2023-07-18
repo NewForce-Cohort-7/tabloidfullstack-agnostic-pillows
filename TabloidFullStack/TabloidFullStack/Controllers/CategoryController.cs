@@ -41,5 +41,26 @@ namespace TabloidFullStack.Controllers
             _categoryRepository.Add(category);
             return CreatedAtAction("Get", new { id = category.Id }, category);
         }
+
+        // http://localhost:5000/api/category/5
+        [HttpPut("{id}")]
+        public ActionResult Put(int id, Category category)
+        {
+            if (id != category.Id)
+            {
+                return BadRequest();
+            }
+
+            _categoryRepository.Update(category);
+            return NoContent();
+        }
+
+        // http://localhost:5000/api/category/5
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            _categoryRepository.Delete(id);
+            return NoContent();
+        }
     }
 }
