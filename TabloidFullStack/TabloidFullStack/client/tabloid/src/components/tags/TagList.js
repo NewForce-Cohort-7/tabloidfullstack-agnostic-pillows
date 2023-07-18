@@ -22,6 +22,8 @@ const TagList = () => {
   return (
     <Container>
       <Row className="flex-column">
+        <h2>Tags</h2>
+          <Button tag={Link} to="/tag-form" className="create-tag-btn">Create New Tag</Button>
         {tags.map((tag) => (
           <Col md={6} lg={4} key={tag.id}>
             <Card className="mb-4">
@@ -30,7 +32,6 @@ const TagList = () => {
           </Col>
         ))}
       </Row>
-      <Button tag={Link} to="/tag-form">Create New Tag</Button>
     </Container>
   );
 };

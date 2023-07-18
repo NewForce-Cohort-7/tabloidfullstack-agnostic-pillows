@@ -15,7 +15,7 @@ export default function ApplicationViews() {
       <Routes>
         <Route path="/" element={<Hello />} />
         <Route path="tags" element={<TagList /> } />
-        <Route path="tag-form" component={<TagForm />} />
+        <Route path="tag-form" element={<TagForm />} />
         <Route path="posts" element={<PostList />} />
         <Route path="categories" element={<CategoryList />} />
         <Route path="category-form" element={<CategoryForm />} />
