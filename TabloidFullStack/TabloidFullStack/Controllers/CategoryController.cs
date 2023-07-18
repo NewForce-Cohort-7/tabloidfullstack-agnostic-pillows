@@ -21,5 +21,25 @@ namespace TabloidFullStack.Controllers
         {
             return Ok(_categoryRepository.GetAll());
         }
+
+        // http://localhost:5000/api/category/5
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
+        {
+            var category = _categoryRepository.GetById(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
+        }
+
+        // http://localhost:5000/api/category
+        [HttpPost]
+        public ActionResult Post(Category category)
+        {
+            _categoryRepository.Add(category);
+            return CreatedAtAction("Get", new { id = category.Id }, category);
+        }
     }
 }
