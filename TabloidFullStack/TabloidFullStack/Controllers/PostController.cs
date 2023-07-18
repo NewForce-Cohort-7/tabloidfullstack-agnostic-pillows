@@ -16,18 +16,12 @@ namespace TabloidFullStack.Controllers
         {
             _postRepository = postRepository;
         }
-        private int GetCurrentUserProfileId()
-        {
-            string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            return int.Parse(id);
-        }
-
         [HttpGet]
         public IActionResult Get()
         {
             return Ok(_postRepository.GetAllPosts());
         }
-        [HttpGet("UserId")]
+        [HttpGet("GetUsersPosts/{id}")]
         public IActionResult Get(int id)
         {
             List<Post> posts = _postRepository.GetPostsByUserId(id);

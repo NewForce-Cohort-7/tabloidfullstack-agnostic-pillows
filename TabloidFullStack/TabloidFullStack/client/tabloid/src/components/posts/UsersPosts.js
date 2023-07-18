@@ -6,17 +6,20 @@ import { Post } from "./Post";
 
 export const UsersPosts = () => {
     const [userPost, setUserPost] = useState([]);
-    const { UserId } = useParams();
+    //grab the currently logged in user
+    const localTabloidUser = localStorage.getItem("userProfile")
+    const tabloidUserObject = JSON.parse(localTabloidUser)
 
     useEffect(() => {
-        getAllUsersPosts(UserId)
+        //use the currently logged in user's id in the getAllUsersPosts function where the userId is taken as the parameter
+        getAllUsersPosts(tabloidUserObject.id)
             .then((data) => {
                 setUserPost(data)
             })
             .catch((error) => {
                 console.log("Error fetching user posts:", error)
             });
-    }, [UserId]);
+    }, [tabloidUserObject.id]);
 
     return (
         <Container>
