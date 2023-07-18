@@ -15,7 +15,7 @@ This functionality has now been implemented.
 
 **GIT this branch:**
 1. Clone this repository to your own machine using `git clone https://github.com/NewForce-Cohort-7/tabloidfullstack-agnostic-pillows.git`
-2. `git fetch -a` in the master branch to retrieve this branch named `branch-name`.
+2. `git fetch -a` in the main branch to retrieve this branch named `branch-name`.
 3.  checkout this branch using the command `git checkout branch-name`
 
 
