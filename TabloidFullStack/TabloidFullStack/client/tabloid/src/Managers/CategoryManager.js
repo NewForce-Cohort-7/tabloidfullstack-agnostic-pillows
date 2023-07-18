@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react";
 
-const apiUrl = "https://localhost:5001";
+
 
 export const CategoryContext = createContext();
 
@@ -9,7 +9,7 @@ const CategoryProvider = (props) => {
   const [categories, setCategories] = useState([]);
 
   const getAllCategories = () => {
-    return fetch(`${apiUrl}/api/category`)
+    return fetch(`/api/Category`)
       .then((res) => res.json())
       .then(setCategories);
   };
