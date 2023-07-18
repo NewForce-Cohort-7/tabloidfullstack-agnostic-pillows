@@ -14,7 +14,7 @@ namespace TabloidFullStack.Models
         public string ImageLocation { get; set; }
         public DateTime CreateDateTime { get; set; }
         [DisplayName("Published")]
-        public DateTime PublishDateTime { get; set; }
+        public DateTime? PublishDateTime { get; set; }
         public bool IsApproved { get; set; }
         [Required]
         [DisplayName("Category")]

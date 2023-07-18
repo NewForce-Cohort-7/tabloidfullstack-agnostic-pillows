@@ -16,8 +16,8 @@ namespace TabloidFullStack.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT p.Id, p.Title, p.Content, p.ImageLocation AS ImageUrl, p.CreateDateTime, p.PublishDateTime, p.IsApproved, p.CatagoryId, p.UserProfileId,
-                            c.[Name] as CatagoryName,
+                        SELECT p.Id, p.Title, p.Content, p.ImageLocation AS ImageUrl, p.CreateDateTime, p.PublishDateTime, p.IsApproved, p.CategoryId, p.UserProfileId,
+                            c.[Name] as CategoryName,
                             u.FirstName, u.LastName, u.DisplayName, u.Email, u.CreateDateTime, u.ImageLocation as UserImageUrl, u.UserTypeId,
                             ut.[Name] as UserTypeName
                         FROM Post p
@@ -25,6 +25,7 @@ namespace TabloidFullStack.Repositories
                             LEFT JOIN UserProfile u ON p.UserProfileId = u.Id
                             LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
                         WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
+                        ORDER BY PublishDateTime desc
                     ";
                     var reader = cmd.ExecuteReader();
 
@@ -37,9 +38,9 @@ namespace TabloidFullStack.Repositories
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Title = reader.GetString(reader.GetOrdinal("Title")),
                             Content = reader.GetString(reader.GetOrdinal("Content")),
-                            ImageLocation = DbUtils.GetString(reader, "HeaderImage"),
+                            ImageLocation = DbUtils.GetNullableString(reader, "ImageUrl"),
                             CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                            PublishDateTime = DbUtils.GetDateTime(reader, "PublishDateTime"),
+                            PublishDateTime = DbUtils.GetNullableDateTime(reader, "PublishDateTime"),
                             CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
                             //Category = new Category()
                             //{
@@ -55,7 +56,7 @@ namespace TabloidFullStack.Repositories
                                 DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
                                 Email = reader.GetString(reader.GetOrdinal("Email")),
                                 CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                                ImageLocation = DbUtils.GetString(reader, "AvatarImage"),
+                                ImageLocation = DbUtils.GetNullableString(reader, "UserImageUrl"),
                                 UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
                                 UserType = new UserType()
                                 {
