@@ -27,7 +27,7 @@ namespace TabloidFullStack.Controllers
         {
             return Ok(_postRepository.GetAllPosts());
         }
-        [HttpGet("{id}")]
+        [HttpGet("UserId")]
         public IActionResult Get(int id)
         {
             List<Post> posts = _postRepository.GetPostsByUserId(id);
