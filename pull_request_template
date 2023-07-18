@@ -22,13 +22,13 @@ This functionality has now been implemented.
 **Create the database:**
 1. Open Visual Studio.
 2. At the start screen select "Open a Local Folder"
-4. Navigate to your workspace directory, open the `tabloidfullstack-agnostic-pinchers` folder, then select the SQL folder
+4. Navigate to your workspace directory, open the `tabloidfullstack-agnostic-pillows` folder, then select the SQL folder
 5. Run both .sql files in the [SQL folder](https://github.com/NewForce-Cohort-7/tabloidfullstack-agnostic-pillows/tree/main/SQL) (The first file creates the database and tables if they don’t already exist, and the second file inserts a very small amount of sample data into those tables for testing.).
 
 **Run the app:**
 1. Open Visual Studio
 2. At the start screen select Open a project or solution.
-3. Navigate to your workspace directory, open the `tabloidfullstack-agnostic-pinchers` folder, and select the .sln file to run the solution.
+3. Navigate to your workspace directory, open the `tabloidfullstack-agnostic-pillows` folder, and select the .sln file to run the solution.
 4. In the Solution Explorer in Visual Studio, click on `properties` and into `launchSettings.json`.  Update the applicationUrl under `schema` and `profiles` to "https://localhost:5001". 
 5. Hit the Green play button on the toolbar that says TabloidFullStack.
 6. This will launch the Swagger page in your default browser. The Swagger page provides the endpoints and data from the SQL server that we created. 
