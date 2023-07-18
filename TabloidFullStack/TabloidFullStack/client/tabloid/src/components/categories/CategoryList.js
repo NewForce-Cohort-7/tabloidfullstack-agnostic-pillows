@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { CategoryContext } from "./CategoryProvider";
-import { Category } from "./Category";
+import { CategoryContext } from "../../Managers/CategoryManager";
+import Category  from "./Category";
 
 const CategoryList = () => {
     const { categories, getAllCategories } = useContext(CategoryContext);
@@ -11,6 +11,7 @@ const CategoryList = () => {
 
     return (
         <div className="categories">
+            <h2>Categories</h2>
             {categories.map((category) => (
                 <Category key={category.id} category={category} />
             ))}
