@@ -36,6 +36,11 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
           <Nav navbar>
             {isLoggedIn && (
               <>
+              <NavItem>
+              <NavLink tag={RRNavLink} to="/categories">
+                Category Management
+              </NavLink>
+              </NavItem>
                 <NavItem>
                   <a
                     aria-current="page"
