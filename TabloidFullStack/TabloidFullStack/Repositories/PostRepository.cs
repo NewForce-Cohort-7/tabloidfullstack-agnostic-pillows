@@ -42,11 +42,11 @@ namespace TabloidFullStack.Repositories
                             CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
                             PublishDateTime = DbUtils.GetNullableDateTime(reader, "PublishDateTime"),
                             CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                            //Category = new Category()
-                            //{
-                            //    Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                            //    Name = reader.GetString(reader.GetOrdinal("CategoryName"))
-                            //},
+                            Category = new Category()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                                Name = reader.GetString(reader.GetOrdinal("CategoryName"))
+                            },
                             UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                             UserProfile = new UserProfile()
                             {

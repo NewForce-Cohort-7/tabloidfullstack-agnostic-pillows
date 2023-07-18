@@ -14,9 +14,9 @@ export const Post = ({ postProp }) => {
                 <div className="post-author">
                   by: {postProp.userProfile.fullName}
                 </div>
-                {/* <div>
+                <div>
                     {postProp.category.name}
-                </div> */}
+                </div>
                 <div>{formattedDate}</div>
             </div>
         </CardBody>

@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
 import { useEffect } from 'react';
 import Authorize from './components/Authorize';
+import CategoryProvider from './Managers/CategoryManager';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -20,7 +21,9 @@ function App() {
         <Router>
             <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
             {isLoggedIn ?
+            <CategoryProvider>
                 <ApplicationViews />
+            </CategoryProvider>
                 :
                 <Authorize setIsLoggedIn={setIsLoggedIn} />
             }
