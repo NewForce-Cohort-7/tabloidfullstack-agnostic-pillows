@@ -29,14 +29,13 @@ This functionality has now been implemented.
 1. Open Visual Studio
 2. At the start screen select Open a project or solution.
 3. Navigate to your workspace directory, open the `tabloidfullstack-agnostic-pillows` folder, and select the .sln file to run the solution.
-4. In the Solution Explorer in Visual Studio, click on `properties` and into `launchSettings.json`.  Update the applicationUrl under `schema` and `profiles` to "https://localhost:5001". 
-5. Hit the Green play button on the toolbar that says TabloidFullStack.
-6. This will launch the Swagger page in your default browser. The Swagger page provides the endpoints and data from the SQL server that we created. 
-7. Now we need to run the React side of the app. 
-8. In your command line, cd into the `client` folder and into the `tabloid` folder. 
-9. Start by running `npm install react-scripts`. Once this has been installed, type `npm start`. 
-10. This will open the React app in your default browser. You should now see the log-in page. 
-11. Log in to user `foo@bar.com`. You do not need to enter a password. 
+4. Hit the Green play button on the toolbar that says TabloidFullStack.
+5. This will launch the Swagger page in your default browser. The Swagger page provides the endpoints and data from the SQL server that we created. 
+6. Now we need to run the React side of the app. 
+7. In your command line, cd into the `client` folder and into the `tabloid` folder. 
+8. Start by running `npm install react-scripts`. Once this has been installed, type `npm start`. 
+9. This will open the React app in your default browser. You should now see the log-in page. 
+10. Log in to user `foo@bar.com`. You do not need to enter a password. 
 
 **Test the new feature:**
 
