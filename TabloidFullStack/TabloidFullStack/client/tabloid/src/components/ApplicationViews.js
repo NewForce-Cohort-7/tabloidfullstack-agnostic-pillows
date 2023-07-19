@@ -10,6 +10,7 @@ import { UsersPosts } from "./posts/UsersPosts";
 import { PostDetails } from "./posts/PostDetails";
 import EditCategoryForm from "./categories/EditCategory";
 import { UserProfileList } from "./userProfiles/UserProfileList";
+import { PostForm } from "./posts/PostForm";
 
 
 
@@ -22,6 +23,7 @@ export default function ApplicationViews() {
         <Route path="tag-form" element={<TagForm />} />
         <Route path="posts" element={<PostList />} />
         <Route path="posts/:id" element={<PostDetails />} />
+        <Route path="posts/add" element={<PostForm />} />
         <Route path="my-posts" element={<UsersPosts />} />
         <Route path="categories" element={<CategoryList />} />
         <Route path="category-form" element={<CategoryForm />} />

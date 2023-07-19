@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { FormGroup, Input, Label } from "reactstrap"
+import { CategoryContext } from "../../Managers/CategoryManager"
+import { addPost } from "../../Managers/PostManager"
 
 export const PostForm = () => {
     const localTabloidUser = localStorage.getItem("userProfile")
     const tabloidUserObject = JSON.parse(localTabloidUser)
-    const [selectedCategory, setSelectedCategory] = useState([])
+    const { getAllCategories, categories } = useContext(CategoryContext)
     const navigate = useNavigate();
 
     const [newPost, updatePost] = useState({
@@ -15,12 +17,34 @@ export const PostForm = () => {
         userProfileId: tabloidUserObject.id,
         createDateTime: Date.now(),
         publishDateTime: null,
-        categoryId: null
+        categoryId: ""
     })
-    
+
     useEffect(() => {
-        
-    },[])
+        getAllCategories()
+    }, [])
+
+    const handleSaveButtonClick = (e) => {
+        e.preventDefault()
+
+        if (newPost.categoryId === "") {
+            alert("Please select a category");
+            return;
+        }
+
+        const postToSendToAPI = {
+            Title: newPost.title,
+            Content: newPost.content,
+            ImageLocation: newPost.imageLocation,
+            CreateDateTime: new Date().toISOString(),
+            PublishDateTime: null,
+            IsApproved: true,
+            CategoryId: newPost.categoryId,
+            UserProfileId: tabloidUserObject.id
+        }
+        addPost(postToSendToAPI)
+            .then(navigate("/"))
+    }
 
     return (
         <form className="post-form">
@@ -80,12 +104,16 @@ export const PostForm = () => {
                         type="select"
                         name="category"
                         id="categoryDropdown"
-                        value={selectedCategory.id}
-                        onChange={event => updatePost(event)}
+                        value={newPost.categoryId}
+                        onChange={(event) => {
+                            const copy = { ...newPost }
+                            copy.categoryId = parseInt(event.target.value)
+                            updatePost(copy)
+                        }}
                     >
                         <option value="">Select...</option>
                         {categories.map((category) => (
-                            <option key={category.id} value={category}>{category.name}</option>
+                            <option key={category.id} value={category.id || ""}>{category.name}</option>
                         ))}
                     </Input>
                 </FormGroup>
@@ -94,4 +122,4 @@ export const PostForm = () => {
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)} className="btn btn-primary">Submit Post</button>
         </form>
     )
-}
+}   
