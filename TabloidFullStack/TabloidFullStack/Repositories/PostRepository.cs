@@ -111,5 +111,40 @@ namespace TabloidFullStack.Repositories
                 }
             }
         }
+        public Post GetPostById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using ( var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT p.Id, p.Title, p.Content, p.ImageLocation AS ImageUrl, p.CreateDateTime, p.PublishDateTime, p.IsApproved, p.CategoryId, p.UserProfileId,
+                            c.[Name] as CategoryName,
+                            u.FirstName, u.LastName, u.DisplayName, u.Email, u.CreateDateTime, u.ImageLocation as UserImageUrl, u.UserTypeId,
+                            ut.[Name] as UserTypeName
+                        FROM Post p
+                            LEFT JOIN Category c ON p.CategoryId = c.Id
+                            LEFT JOIN UserProfile u ON p.UserProfileId = u.Id
+                            LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
+                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
+                        AND p.Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    Post post = null;
+
+                    if (reader.Read())
+                    {
+                        post = NewPostFromReader(reader);
+                    }
+
+                    reader.Close();
+
+                    return post;
+                }
+            }
+        }
     }
 }

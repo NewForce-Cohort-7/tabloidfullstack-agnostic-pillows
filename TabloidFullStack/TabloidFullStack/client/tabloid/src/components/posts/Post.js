@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { CardBody } from "reactstrap"
 
 export const Post = ({ postProp }) => {
@@ -10,11 +11,11 @@ export const Post = ({ postProp }) => {
     return (
         <CardBody>
             <div>
-                <strong className="post-title">
-                    {postProp.title}
-                </strong>
+                <Link to={`/posts/${postProp.id}`}>
+                    <strong className="post-title">{postProp.title}</strong>
+                </Link>
                 <div className="post-author">
-                  by: {postProp.userProfile.fullName}
+                    by: {postProp.userProfile.fullName}
                 </div>
                 <div>
                     {postProp.category.name}
