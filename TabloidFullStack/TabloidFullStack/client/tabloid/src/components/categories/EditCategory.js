@@ -45,6 +45,10 @@ const EditCategoryForm = () => {
         setCategory(stateToChange);
     }
 
+    const handleCancel = () => {
+        navigate("/categories");
+    }
+
     return (
         <Form onSubmit={handleSubmit}>
             <h2>Edit Category</h2>
@@ -53,6 +57,7 @@ const EditCategoryForm = () => {
                 <Input type="text" id="name" onChange={handleFieldChange} value={category.name} required />
             </FormGroup>
             <Button type="submit">Save</Button>
+            <Button onClick={handleCancel}>Cancel</Button>
         </Form>
     );
 }
