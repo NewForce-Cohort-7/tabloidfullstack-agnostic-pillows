@@ -19,4 +19,10 @@
   .row.justify-content-center {
     margin-bottom: 20px;
   }
+
+  .create-tag-btn {
+    width: 150px; 
+    margin-bottom: 8px;
+  }
+  
   
