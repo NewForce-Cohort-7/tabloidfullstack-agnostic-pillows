@@ -4,6 +4,8 @@ export const Post = ({ postProp }) => {
 
     const publishDateTime = new Date(postProp.publishDateTime);
     const formattedDate = publishDateTime.toLocaleDateString();
+    const createDateTime = new Date(postProp.createDateTime);
+    const formattedCreationDate = createDateTime.toLocaleDateString();
 
     return (
         <CardBody>
@@ -17,7 +19,8 @@ export const Post = ({ postProp }) => {
                 <div>
                     {postProp.category.name}
                 </div>
-                <div>{formattedDate}</div>
+                <div>Created: {formattedCreationDate}</div>
+                <div>Published: {formattedDate}</div>
             </div>
         </CardBody>
     )
