@@ -12,7 +12,7 @@ export const Post = ({ postProp }) => {
         <CardBody>
             <div>
                 <Link to={`/posts/${postProp.id}`}>
-                    <strong>{postProp.title}</strong>
+                    <strong className="post-title">{postProp.title}</strong>
                 </Link>
                 <div className="post-author">
                     by: {postProp.userProfile.fullName}

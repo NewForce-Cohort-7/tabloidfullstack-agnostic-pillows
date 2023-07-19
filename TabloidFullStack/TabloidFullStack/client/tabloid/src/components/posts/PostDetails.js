@@ -17,21 +17,34 @@ export const PostDetails = () => {
     }
     return <>
     {
-
+        post.imageLocation === null ? 
         <Container>
             <Row className="post-row">
                 <Col md={6} lg={4} key={post.id}>
                     <Card className="post-card">
-                        <div>{post.title}</div>
-                        <div>{post.userProfile?.displayName}</div>
+                        <strong className="post-title">{post.title}</strong>
                         <div>{post.content}</div>
                         <div>Published: {formattedDate}</div>
+                        <div>{post.userProfile?.displayName}</div>
                     </Card>
                 </Col>
             </Row>
-        </Container>
-        }
-    ;
+        </Container> 
+        :
+        <Container>
+            <Row className="post-row">
+                <Col md={10} lg={14} key={post.id}>
+                    <Card className="post-card-details">
+                        <strong className="post-title">{post.title}</strong>
+                        <img src={post.imageLocation} alt="A placeholder picture that doesn't exist anymore"></img>
+                        <div>{post.content}</div>
+                        <div>Published: {formattedDate}</div>
+                        <div>by: {post.userProfile?.displayName}</div>
+                    </Card>
+                </Col>
+            </Row>
+        </Container> 
+    }  
     </>
     
 }
