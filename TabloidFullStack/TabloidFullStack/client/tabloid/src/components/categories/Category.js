@@ -22,6 +22,9 @@ const Category = ({ category, deleteCategory }) => {
       <Card className="m-4">
         <CardBody className="text-center">
         <h5 className="text-center px-2">{category.name}</h5>
+          <Button color="primary" onClick={() => navigate(`/categories/${category.id}/edit`)}>
+            Edit
+          </Button>
           <Button color="danger" onClick={handleDelete}>
             Delete
           </Button>
