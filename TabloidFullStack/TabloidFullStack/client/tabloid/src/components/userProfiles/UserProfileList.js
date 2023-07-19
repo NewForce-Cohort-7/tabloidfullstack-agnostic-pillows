@@ -8,7 +8,13 @@ export const UserProfileList = () => {
 
     useEffect(() => {
         getAllUserProfiles()
-            .then(userProfiles => setUserProfiles(userProfiles));
+            .then(userProfiles => {
+                // sorts userProfiles by display name alphabetically
+                const sortedUserProfiles = userProfiles.sort((a, b) =>
+                    a.displayName.localeCompare(b.displayName)
+                );
+                setUserProfiles(sortedUserProfiles);
+            });
     }, []);
 
     return (
@@ -26,6 +32,5 @@ export const UserProfileList = () => {
                 ))}
             </Row>
         </Container>
-    )
-}
-
+    );
+};
