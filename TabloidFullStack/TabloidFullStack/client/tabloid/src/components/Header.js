@@ -36,7 +36,6 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
           <Nav navbar>
             {isLoggedIn && (
               <>
-               
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/posts">
                     Posts
@@ -45,6 +44,11 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/my-posts">
                     My Posts
+                </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/users">
+                    Users
                 </NavLink>
                 </NavItem>
                 <NavItem>

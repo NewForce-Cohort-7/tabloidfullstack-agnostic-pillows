@@ -10,13 +10,21 @@ namespace TabloidFullStack.Controllers
     [ApiController]
     public class UserProfileController : ControllerBase
     { 
-     //private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IUserProfileRepository _userProfileRepository;
         private readonly IUserRepository _userRepository;
-    public UserProfileController(IUserRepository userRepository)
+        
+    public UserProfileController(IUserRepository userRepository, IUserProfileRepository userProfileRepository)
     {
-        //_userProfileRepository = userProfileRepository;
+        _userProfileRepository = userProfileRepository;
         _userRepository = userRepository;
     }
+    
+    // GET: api/<UserProfileController>
+    [HttpGet]
+    public IActionResult Get()
+    {
+      return Ok(_userProfileRepository.GetAll());
+     }
 
     [HttpGet("GetByEmail")]
     public IActionResult GetByEmail(string email)
