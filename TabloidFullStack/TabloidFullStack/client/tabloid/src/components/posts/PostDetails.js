@@ -15,18 +15,23 @@ export const PostDetails = () => {
     if (!post) {
         return null;
     }
-    return (
+    return <>
+    {
+
         <Container>
             <Row className="post-row">
                 <Col md={6} lg={4} key={post.id}>
                     <Card className="post-card">
                         <div>{post.title}</div>
-                        <div>{post.userProfile.displayName}</div>
+                        <div>{post.userProfile?.displayName}</div>
                         <div>{post.content}</div>
-                        <div>{formattedDate}</div>
+                        <div>Published: {formattedDate}</div>
                     </Card>
                 </Col>
             </Row>
         </Container>
-    );
+        }
+    ;
+    </>
+    
 }
