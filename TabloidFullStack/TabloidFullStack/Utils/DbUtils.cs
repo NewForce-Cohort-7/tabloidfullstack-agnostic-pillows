@@ -110,6 +110,10 @@ namespace TabloidFullStack.Utils
         {
             return !IsDbNull(reader, column);
         }
+        public static object ValueOrDBNull(object value)
+        {
+            return value ?? DBNull.Value;
+        }
 
         /// <summary>
         ///  Add a parameter to the given SqlCommand object and gracefully handle null values.
