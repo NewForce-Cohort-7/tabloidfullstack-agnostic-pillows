@@ -14,3 +14,9 @@ export const addTag = (tag) => {
     body: JSON.stringify(tag),
   });
 };
+
+export const deleteTag = (Id) => {
+  return fetch(`${baseUrl}/${Id}`, {
+    method: "DELETE",
+  }).then(GetAllTags);
+};
