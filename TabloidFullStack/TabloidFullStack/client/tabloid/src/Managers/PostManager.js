@@ -32,3 +32,13 @@ export const addPost = (singlePost) => {
         return data.id;
     });
 };
+export const editPost = (post) => {
+    //make sure your parameter matches the one you are sending to the API
+    return fetch(`${baseUrl}/${post.Id}`, {
+        method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(post)
+    })
+}

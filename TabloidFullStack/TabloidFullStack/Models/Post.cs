@@ -6,13 +6,13 @@ namespace TabloidFullStack.Models
 {
     public class Post
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [Required]
-        public string Title { get; set; }
+        public string? Title { get; set; }
         [Required]
-        public string Content { get; set; }
+        public string? Content { get; set; }
         [DisplayName("Image URL")]
-        public string ImageLocation { get; set; }
+        public string? ImageLocation { get; set; }
         public DateTime CreateDateTime { get; set; }
         [DisplayName("Published")]
         public DateTime? PublishDateTime { get; set; }
