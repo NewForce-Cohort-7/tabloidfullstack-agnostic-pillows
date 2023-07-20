@@ -8,6 +8,7 @@ namespace TabloidFullStack.Repositories
         List<Post> GetPostsByUserId(int userProfileId);
         Post GetPostById(int postId);
         void Add(Post post);
+        void Update(Post post);
 
     }
 }

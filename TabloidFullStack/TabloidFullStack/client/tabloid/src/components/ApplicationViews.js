@@ -12,6 +12,7 @@ import EditCategoryForm from "./categories/EditCategory";
 import { UserProfileList } from "./userProfiles/UserProfileList";
 import { PostForm } from "./posts/PostForm";
 import { UserProfileDetails } from "./userProfiles/UserProfileDetails";
+import { PostEdit } from "./posts/PostEdit";
 
 
 
@@ -25,6 +26,7 @@ export default function ApplicationViews() {
         <Route path="posts" element={<PostList />} />
         <Route path="posts/:id" element={<PostDetails />} />
         <Route path="posts/add" element={<PostForm />} />
+        <Route path="posts/:postId/edit" element={<PostEdit />} />
         <Route path="my-posts" element={<UsersPosts />} />
         <Route path="categories" element={<CategoryList />} />
         <Route path="category-form" element={<CategoryForm />} />

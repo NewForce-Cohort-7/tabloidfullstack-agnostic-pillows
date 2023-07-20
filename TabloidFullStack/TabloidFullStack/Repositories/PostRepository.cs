@@ -174,5 +174,38 @@ namespace TabloidFullStack.Repositories
                 }
             }
         }
+        public void Update(Post post)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Post
+                        SET
+                        [Title] = @title,
+                         [Content] = @content,
+                         [ImageLocation] = @imageLocation,
+                         [CreateDateTime] = @createDateTime,
+                         [PublishDateTime] = @publishDateTime,
+                         [CategoryId] = @categoryId,
+                         [UserProfileId] = @userProfileId
+                        WHERE Id = @id
+                        ";
+                    cmd.Parameters.AddWithValue("@id", post.Id);
+                    cmd.Parameters.AddWithValue("@title", post.Title);
+                    cmd.Parameters.AddWithValue("@content", post.Content);
+                    cmd.Parameters.AddWithValue("@imageLocation", post.ImageLocation);
+                    cmd.Parameters.AddWithValue("@createDateTime", post.CreateDateTime);
+                    cmd.Parameters.AddWithValue("@publishDateTime", post.PublishDateTime);
+                    cmd.Parameters.AddWithValue("@isApproved", post.IsApproved);
+                    cmd.Parameters.AddWithValue("@categoryId", post.CategoryId);
+                    cmd.Parameters.AddWithValue("@userProfileId", post.UserProfileId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
