@@ -23,7 +23,7 @@ const TagList = () => {
     <Container>
       <Row className="flex-column">
         <h2>Tags</h2>
-          <Button tag={Link} to="/tag-form" className="create-tag-btn">Create New Tag</Button>
+          <Button color="success" tag={Link} to="/tag-form" className="create-tag-btn">Create New Tag</Button>
         {tags.map((tag) => (
           <Col md={6} lg={4} key={tag.id}>
             <Card className="mb-4">

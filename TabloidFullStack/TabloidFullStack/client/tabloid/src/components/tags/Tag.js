@@ -44,14 +44,14 @@ const [updatedTag, setUpdatedTag] = useState(tag.name);
               value={updatedTag}
               onChange={handleChange}
             />
-            <Button onClick={handleSave}>Save</Button>
-            <Button onClick={handleCancel}>Cancel</Button>
+            <Button color="primary" onClick={handleSave}>Save</Button>
+            <Button color="danger" onClick={handleCancel}>Cancel</Button>
           </>
         ) : (
           <>
             <p>{tag.name}</p>
-            <Button onClick={handleEdit}>Edit</Button>
-            <Button onClick={handleDelete}>Delete</Button>
+            <Button color="primary" onClick={handleEdit}>Edit</Button>
+            <Button color="danger" onClick={handleDelete}>Delete</Button>
           </>
         )}
             </CardBody>
