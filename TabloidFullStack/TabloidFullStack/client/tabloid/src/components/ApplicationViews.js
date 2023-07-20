@@ -10,6 +10,7 @@ import { UsersPosts } from "./posts/UsersPosts";
 import { PostDetails } from "./posts/PostDetails";
 import EditCategoryForm from "./categories/EditCategory";
 import { UserProfileList } from "./userProfiles/UserProfileList";
+import { UserProfileDetails } from "./userProfiles/UserProfileDetails";
 
 
 
@@ -27,6 +28,7 @@ export default function ApplicationViews() {
         <Route path="category-form" element={<CategoryForm />} />
         <Route path="/categories/:categoryId/edit" element={<EditCategoryForm />} />
         <Route path="users" element={<UserProfileList />} />
+        <Route path="userprofiles/:id" element={<UserProfileDetails />} />
       </Routes>
    );
 };
