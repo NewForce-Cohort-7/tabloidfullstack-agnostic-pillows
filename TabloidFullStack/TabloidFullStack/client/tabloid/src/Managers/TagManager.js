@@ -21,22 +21,13 @@ export const deleteTag = (Id) => {
   }).then(GetAllTags);
 };
 
-export const updateTag = (tagId, updatedName) => {
-  const updatedTag = {
-    name: updatedName
-  };
-
-  return fetch(`${baseUrl}/${tagId}`, {
-    method: 'PUT',
+export const updateTag = (tag) => {
+  return fetch(`${baseUrl}/${tag.id}`, {
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(updatedTag),
-  }).then(response => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error('Failed to update tag');
-    }
+    body: JSON.stringify(tag),
   });
 };
+
