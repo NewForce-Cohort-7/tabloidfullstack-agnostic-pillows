@@ -60,7 +60,7 @@ namespace TabloidFullStack.Repositories
                             LEFT JOIN Category c ON p.CategoryId = c.Id
                             LEFT JOIN UserProfile u ON p.UserProfileId = u.Id
                             LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
-                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
+                        WHERE IsApproved = 1 AND PublishDateTime <= SYSDATETIME()
                         ORDER BY PublishDateTime desc
                     ";
                     var reader = cmd.ExecuteReader();
@@ -93,7 +93,7 @@ namespace TabloidFullStack.Repositories
                             LEFT JOIN Category c ON p.CategoryId = c.Id
                             LEFT JOIN UserProfile u ON p.UserProfileId = u.Id
                             LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
-                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME() AND p.UserProfileId = @userProfileId
+                        WHERE IsApproved = 1 AND PublishDateTime <= SYSDATETIME() AND p.UserProfileId = @userProfileId
                         ORDER BY p.CreateDateTime desc
                     ";
                     cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
@@ -127,7 +127,7 @@ namespace TabloidFullStack.Repositories
                             LEFT JOIN Category c ON p.CategoryId = c.Id
                             LEFT JOIN UserProfile u ON p.UserProfileId = u.Id
                             LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
-                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
+                        WHERE IsApproved = 1 AND PublishDateTime <= SYSDATETIME()
                         AND p.Id = @id";
 
                     cmd.Parameters.AddWithValue("@id", id);
@@ -143,6 +143,34 @@ namespace TabloidFullStack.Repositories
                     reader.Close();
 
                     return post;
+                }
+            }
+        }
+        public void Add(Post post)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Post (
+                            Title, Content, ImageLocation, CreateDateTime, PublishDateTime,
+                            IsApproved, CategoryId, UserProfileId )
+                        OUTPUT INSERTED.ID
+                        VALUES (
+                            @Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime,
+                            @IsApproved, @CategoryId, @UserProfileId )";
+                    cmd.Parameters.AddWithValue("@Title", post.Title);
+                    cmd.Parameters.AddWithValue("@Content", post.Content);
+                    cmd.Parameters.AddWithValue("@ImageLocation", DbUtils.ValueOrDBNull(post.ImageLocation));
+                    cmd.Parameters.AddWithValue("@CreateDateTime", post.CreateDateTime);
+                    cmd.Parameters.AddWithValue("@PublishDateTime", DbUtils.ValueOrDBNull(post.PublishDateTime));
+                    cmd.Parameters.AddWithValue("@IsApproved", post.IsApproved);
+                    cmd.Parameters.AddWithValue("@CategoryId", post.CategoryId);
+                    cmd.Parameters.AddWithValue("@UserProfileId", post.UserProfileId);
+
+                    post.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }
