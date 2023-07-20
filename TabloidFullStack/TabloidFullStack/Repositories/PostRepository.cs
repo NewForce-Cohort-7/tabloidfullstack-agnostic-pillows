@@ -60,7 +60,7 @@ namespace TabloidFullStack.Repositories
                             LEFT JOIN Category c ON p.CategoryId = c.Id
                             LEFT JOIN UserProfile u ON p.UserProfileId = u.Id
                             LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
-                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
+                        WHERE IsApproved = 1 AND PublishDateTime <= SYSDATETIME()
                         ORDER BY PublishDateTime desc
                     ";
                     var reader = cmd.ExecuteReader();
@@ -93,7 +93,7 @@ namespace TabloidFullStack.Repositories
                             LEFT JOIN Category c ON p.CategoryId = c.Id
                             LEFT JOIN UserProfile u ON p.UserProfileId = u.Id
                             LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
-                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME() AND p.UserProfileId = @userProfileId
+                        WHERE IsApproved = 1 AND PublishDateTime <= SYSDATETIME() AND p.UserProfileId = @userProfileId
                         ORDER BY p.CreateDateTime desc
                     ";
                     cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
@@ -127,7 +127,7 @@ namespace TabloidFullStack.Repositories
                             LEFT JOIN Category c ON p.CategoryId = c.Id
                             LEFT JOIN UserProfile u ON p.UserProfileId = u.Id
                             LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
-                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
+                        WHERE IsApproved = 1 AND PublishDateTime <= SYSDATETIME()
                         AND p.Id = @id";
 
                     cmd.Parameters.AddWithValue("@id", id);

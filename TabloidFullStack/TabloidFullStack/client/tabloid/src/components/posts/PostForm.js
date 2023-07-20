@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { FormGroup, Input, Label } from "reactstrap"
+import { Button, FormGroup, Input, Label } from "reactstrap"
 import { CategoryContext } from "../../Managers/CategoryManager"
 import { addPost } from "../../Managers/PostManager"
 
@@ -9,6 +9,10 @@ export const PostForm = () => {
     const tabloidUserObject = JSON.parse(localTabloidUser)
     const { getAllCategories, categories } = useContext(CategoryContext)
     const navigate = useNavigate();
+    const currentDate = new Date();
+    const offset = currentDate.getTimezoneOffset();
+    const timezoneOffset = offset * 60 * 1000;
+    const correctedDate = new Date(currentDate.getTime() - timezoneOffset)
 
     const [newPost, updatePost] = useState({
         title: "",
@@ -31,13 +35,14 @@ export const PostForm = () => {
             alert("Please select a category");
             return;
         }
-
+        //The page that displays all of the posts only shows posts with the publish date < or = to the current time. Unfortunately, the function new Date().toISOString() adds a date that uses UTC, NOT my current timezone. So on line 12-15 I calculated the offset of the timezone in milliseconds, and then subtracted it from the UTC time, and then converted that to an ISOString, allowing me to give the database the correct format of date, while also letting me see my new post immediately instead of having to wait 5 hours.
+        
         const postToSendToAPI = {
             Title: newPost.title,
             Content: newPost.content,
             ImageLocation: newPost.imageLocation,
-            CreateDateTime: new Date().toISOString(),
-            PublishDateTime: null,
+            CreateDateTime: correctedDate.toISOString(),
+            PublishDateTime: correctedDate.toISOString(),
             IsApproved: true,
             CategoryId: newPost.categoryId,
             UserProfileId: tabloidUserObject.id
@@ -49,10 +54,10 @@ export const PostForm = () => {
     return (
         <form className="post-form">
             <h2 className="post-form-title">Create a New Post</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="title">Title:</label>
-                    <input
+                <FormGroup className="form-group">
+                    <Label htmlFor="title">Title:</Label>
+                    <Input
+                        className="post-input"
                         type="text"
                         id="title"
                         value={newPost.title}
@@ -63,13 +68,12 @@ export const PostForm = () => {
                                 updatePost(copy)
                             }
                         } />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="content">Content:</label>
-                    <input
-                        type="textbox"
+                </FormGroup>
+                <FormGroup className="form-group">
+                    <Label htmlFor="content">Content:</Label>
+                    <Input
+                        className="post-input"
+                        type="textarea"
                         id="content"
                         value={newPost.content}
                         onChange={
@@ -79,12 +83,11 @@ export const PostForm = () => {
                                 updatePost(copy)
                             }
                         } />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="imageLocation">Image Url:</label>
-                    <input
+                </FormGroup>
+                <FormGroup className="form-group">
+                    <Label htmlFor="imageLocation">Image Url:</Label>
+                    <Input
+                        className="post-input"
                         type="text"
                         id="imageLocation"
                         value={newPost.imageLocation}
@@ -95,12 +98,11 @@ export const PostForm = () => {
                                 updatePost(copy)
                             }
                         } />
-                </div>
-            </fieldset>
-            <fieldset>
+                </FormGroup>
                 <FormGroup>
                     <Label for="categoryDropdown">Select Category:</Label>
                     <Input
+                        className="post-input"
                         type="select"
                         name="category"
                         id="categoryDropdown"
@@ -117,9 +119,8 @@ export const PostForm = () => {
                         ))}
                     </Input>
                 </FormGroup>
-            </fieldset>
-            <button
-                onClick={(clickEvent) => handleSaveButtonClick(clickEvent)} className="btn btn-primary">Submit Post</button>
+            <Button
+                onClick={(clickEvent) => handleSaveButtonClick(clickEvent)} className="btn btn-primary">Submit Post</Button>
         </form>
     )
 }   
