@@ -20,3 +20,14 @@ export const deleteTag = (Id) => {
     method: "DELETE",
   }).then(GetAllTags);
 };
+
+export const updateTag = (tag) => {
+  return fetch(`${baseUrl}/${tag.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(tag),
+  });
+};
+
