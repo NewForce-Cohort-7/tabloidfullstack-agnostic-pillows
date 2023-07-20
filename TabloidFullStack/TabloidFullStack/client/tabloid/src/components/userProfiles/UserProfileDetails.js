@@ -28,7 +28,9 @@ export const UserProfileDetails = () => {
                             <CardSubtitle tag="h6" className="mb-2">Email: {userProfile.email}</CardSubtitle>
                             <CardSubtitle tag="h6" className="mb-2">Full Name: {userProfile.firstName} {userProfile.lastName}</CardSubtitle>
                             <CardSubtitle tag="h6" className="mb-2">User Type: {userProfile.userType?.name}</CardSubtitle>
-                            <CardSubtitle tag ="h6" className="mb-2">Creation Date: {userProfile.createDateTime}</CardSubtitle>
+                            <CardSubtitle tag ="h6" className="mb-2">Creation Date: {
+                                new Date(userProfile.createDateTime).toLocaleDateString('en-US')
+                            }</CardSubtitle>
                         </CardBody>
                     </Card>
                 </Col>
