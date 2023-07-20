@@ -32,11 +32,16 @@ export const register = (userObject, password) => {
     });
 };
 
+// user profile stuff 
 export const getAllUserProfiles = () => {
   return fetch(`${apiUrl}/api/userprofile`)
   .then((response) => response.json())
 };
 
+export const getUserProfileById = (id) => {
+  return fetch(`${apiUrl}/api/userprofile/${id}`)
+  .then((response) => response.json())
+};
 
 
 

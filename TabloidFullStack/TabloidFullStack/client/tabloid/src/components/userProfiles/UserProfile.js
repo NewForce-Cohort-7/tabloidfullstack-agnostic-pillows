@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import { Card, CardBody } from "reactstrap"
 import { getAllUserProfiles } from "../../Managers/UserProfileManager"
 
@@ -16,7 +17,7 @@ export const UserProfile = ({ userProfileProp }) => {
             <CardBody>
                 <div>
                     <strong className="userProfile-title">
-                        <h5>{userProfileProp.fullName}</h5>
+                    <Link to={`/userprofiles/${userProfileProp.id}`}><h5>{userProfileProp.fullName}</h5></Link>
                     </strong>
                     <div className="userProfile-author">
                       <strong>Display Name:</strong> {userProfileProp.displayName}

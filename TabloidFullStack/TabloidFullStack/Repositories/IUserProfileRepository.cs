@@ -6,6 +6,7 @@ namespace TabloidFullStack.Repositories
     public interface IUserProfileRepository
     {
         List<UserProfile> GetAll();
+        UserProfile GetById(int id);
        
     }
 }
