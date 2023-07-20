@@ -13,6 +13,7 @@ export const getPostById = (id) => {
     return fetch(`${baseUrl}/${id}`)
         .then((res) => res.json())
 };
+//I had to have the addPost fetch call return a response to get the id from the created post. So that I can use that id to navigate to the newly created post's details page
 export const addPost = (singlePost) => {
     return fetch(baseUrl, {
         method: "POST",
@@ -20,5 +21,14 @@ export const addPost = (singlePost) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(singlePost),
+    })
+    .then((res) => {
+        if (!res.ok) {
+            throw new Error("Failed to create new Post")
+        }
+        return res.json();
+    })
+    .then((data) => {
+        return data.id;
     });
 };

@@ -48,8 +48,12 @@ export const PostForm = () => {
             UserProfileId: tabloidUserObject.id
         }
         addPost(postToSendToAPI)
-            .then(navigate("/"))
-    }
+        .then((postId) => {
+            if (postId) {
+                navigate(`/posts/${postId}`);
+            }
+        });
+    };
 
     return (
         <form className="post-form">
