@@ -29,7 +29,7 @@ namespace TabloidFullStack.Controllers
             return Ok(_userProfileRepository.GetAll());
         }
 
-        // GET: api/<UserProfileController>/5 - getById
+        // GET: api/<UserProfileController>/5 - getById/details
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
