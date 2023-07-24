@@ -22,3 +22,7 @@
     width: 1000px;
     box-sizing: border-box,
 }
+.post-button {
+    margin-left: 2px;
+    margin-right: 2px;
+}
