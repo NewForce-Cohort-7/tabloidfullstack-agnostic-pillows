@@ -32,6 +32,7 @@ export const PostDetails = () => {
                 </Col>
             </Row>
             <Button tag={Link} to="edit">Edit Post</Button>
+            <Link to={`/comment/${post.id}`}>View Comments</Link>
         </Container> 
         :
         <Container>
@@ -47,6 +48,7 @@ export const PostDetails = () => {
                 </Col>
             </Row>
         <Button tag={Link} to="edit">Edit Post</Button>
+        <Link to={`/comment/${post.id}`}>View Comments</Link>
         </Container>
          
     }  
@@ -65,6 +67,7 @@ export const PostDetails = () => {
                     </Card>
                 </Col>
             </Row>
+            <Link to={`/comment/${post.id}`}>View Comments</Link>
         </Container> 
         :
         <Container>
@@ -76,9 +79,11 @@ export const PostDetails = () => {
                         <div>{post.content}</div>
                         <div>Published: {formattedDate}</div>
                         <div>by: {post.userProfile?.displayName}</div>
+                        <Link to={`/comment/${post.id}`}>View Comments</Link>
                     </Card>
                 </Col>
             </Row>
+            
         </Container> 
     }  
     </>
