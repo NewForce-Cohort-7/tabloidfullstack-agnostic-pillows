@@ -26,7 +26,8 @@ namespace TabloidFullStack.Repositories
                     FROM Comment c
                     LEFT JOIN Post p ON c.PostId = p.Id
                     LEFT JOIN UserProfile u ON c.UserProfileId = u.Id
-                    WHERE c.PostId = @PostId";
+                    WHERE c.PostId = @PostId
+                    order by c.CreateDateTime desc";
 
                     cmd.Parameters.AddWithValue("@PostId", postId);
 
