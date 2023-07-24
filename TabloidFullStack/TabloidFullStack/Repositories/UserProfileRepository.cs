@@ -23,7 +23,7 @@ namespace TabloidFullStack.Repositories
                     cmd.CommandText = @"
                         SELECT up.Id, up.DisplayName, up.FirstName, up.LastName, 
                                up.Email, up.CreateDateTime, up.ImageLocation, up.UserTypeId,
-                               ut.Name AS UserTypeName
+                               ut.Name AS UserTypeName, up.IsActive
                         FROM UserProfile up
                         INNER JOIN UserType ut ON up.UserTypeId = ut.Id";
 
@@ -41,6 +41,7 @@ namespace TabloidFullStack.Repositories
                                 CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
                                 ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
                                 UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                IsActive = DbUtils.GetBoolean(reader, "IsActive"),
                                 UserType = new UserType()
                                 {
                                     Id = DbUtils.GetInt(reader, "UserTypeId"),
@@ -70,7 +71,7 @@ namespace TabloidFullStack.Repositories
                     cmd.CommandText = @"
                 SELECT up.Id, up.DisplayName, up.FirstName, up.LastName, 
                        up.Email, up.CreateDateTime, up.ImageLocation, up.UserTypeId,
-                       ut.Name AS UserTypeName
+                       ut.Name AS UserTypeName, up.IsActive
                 FROM UserProfile up
                 INNER JOIN UserType ut ON up.UserTypeId = ut.Id
                 WHERE up.Id = @Id";
@@ -91,6 +92,7 @@ namespace TabloidFullStack.Repositories
                                 CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
                                 ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
                                 UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                IsActive = DbUtils.GetBoolean(reader, "IsActive"),
                                 UserType = new UserType()
                                 {
                                     Id = DbUtils.GetInt(reader, "UserTypeId"),
@@ -105,27 +107,27 @@ namespace TabloidFullStack.Repositories
             return userProfile;
         }
 
-
-        // deactivate userprofile 
-        public void Deactivate(int id)
+        // deactivate profile by Id/isActive boolean
+        public void DeactivateUserProfile(int userId)
         {
-            using (SqlConnection conn = Connection)
+            using (var conn = Connection)
             {
                 conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
+                using (var cmd = conn.CreateCommand())
                 {
-
                     cmd.CommandText = @"
                         UPDATE UserProfile
                         SET IsActive = 0
-                        WHERE Id = @Id";
+                        WHERE Id = @Id
+                    ";
 
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    DbUtils.AddParameter(cmd, "@Id", userId);
 
                     cmd.ExecuteNonQuery();
                 }
             }
-        }
 
+
+            }
+        }
     }
-}

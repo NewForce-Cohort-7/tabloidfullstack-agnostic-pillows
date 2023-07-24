@@ -31,6 +31,7 @@ export const UserProfileDetails = () => {
                             <CardSubtitle tag ="h6" className="mb-2">Creation Date: {
                                 new Date(userProfile.createDateTime).toLocaleDateString('en-US')
                             }</CardSubtitle>
+                            <CardSubtitle tag="h6" className="mb-2">Account Status: {userProfile.isActive ? "Active" : "Deactivated"}</CardSubtitle>
                         </CardBody>
                     </Card>
                 </Col>

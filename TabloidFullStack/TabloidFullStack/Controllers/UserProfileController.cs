@@ -46,7 +46,7 @@ namespace TabloidFullStack.Controllers
         {
             var user = _userRepository.GetByEmail(email);
 
-            if (email == null || user == null)
+            if (user == null)
             {
                 return NotFound();
             }
@@ -61,5 +61,23 @@ namespace TabloidFullStack.Controllers
             _userRepository.Add(userProfile);
             return CreatedAtAction("GetByEmail", new { email = userProfile.Email }, userProfile);
         }
+
+        // PATCH api/<UserProfileController>/5
+        [HttpPatch("{id}")]
+        public IActionResult Deactivate(int id)
+        {
+            // Check if the user profile exists
+            UserProfile userProfile = _userProfileRepository.GetById(id);
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+
+            // Deactivate the user profile
+            _userProfileRepository.DeactivateUserProfile(id);
+
+            return NoContent();
+        }
+
     }
 }
