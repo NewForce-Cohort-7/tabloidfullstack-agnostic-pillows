@@ -14,6 +14,7 @@ import { PostForm } from "./posts/PostForm";
 import { UserProfileDetails } from "./userProfiles/UserProfileDetails";
 import { PostEdit } from "./posts/PostEdit";
 import { CommentList } from "./Comments/CommentList.js";
+import { CommentForm } from "./Comments/CommentForm.js";
 
 
 
@@ -34,7 +35,8 @@ export default function ApplicationViews() {
         <Route path="/categories/:categoryId/edit" element={<EditCategoryForm />} />
         <Route path="users" element={<UserProfileList />} />
         <Route path="userprofiles/:id" element={<UserProfileDetails />} />
-        <Route path="comment/:id" element={<CommentList />} />
+        <Route path="comments/:id" element={<CommentList />} />
+        <Route path="comment/create/:postId" element={<CommentForm />} />
       </Routes>
    );
 };
