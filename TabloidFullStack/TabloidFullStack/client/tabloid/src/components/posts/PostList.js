@@ -8,13 +8,9 @@ import { Link } from "react-router-dom";
 export const PostList = () => {
     const [posts, setPosts] = useState([]);
 
-    const getPosts = () => {
+    useEffect(() => {
         getAllPosts()
             .then(allPosts => setPosts(allPosts));
-    };
-
-    useEffect(() => {
-        getPosts();
     }, [])
 
     return (
