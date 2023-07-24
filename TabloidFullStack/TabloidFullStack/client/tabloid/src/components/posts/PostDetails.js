@@ -27,71 +27,76 @@ export const PostDetails = () => {
         };
     };
     return (tabloidUserObject.id === post.userProfile?.id) ? <>
-        {
-            post.imageLocation === null ?
-                <Container>
-                    <Row className="post-row">
-                        <Col md={6} lg={4} key={post.id}>
-                            <Card className="post-card">
-                                <strong className="post-title">{post.title}</strong>
-                                <div>{post.content}</div>
-                                <div>Published: {formattedDate}</div>
-                                <div>{post.userProfile?.displayName}</div>
-                            </Card>
-                            <Button tag={Link} to="edit">Edit Post</Button>
-                            <Button onClick={handleDeleteButton}>Delete</Button>
-                        </Col>
-                    </Row>
-                </Container>
-                :
-                <Container>
-                    <Row className="post-row">
-                        <Col md={10} lg={14} key={post.id}>
-                            <Card className="post-card-details">
-                                <strong className="post-title">{post.title}</strong>
-                                <img src={post.imageLocation} alt="A placeholder picture that doesn't exist anymore"></img>
-                                <div>{post.content}</div>
-                                <div>Published: {formattedDate}</div>
-                                <div>by: {post.userProfile?.displayName}</div>
-                            </Card>
-                            <Button tag={Link} to="edit">Edit Post</Button>
-                            <Button onClick={handleDeleteButton}>Delete</Button>
-                        </Col>
-                    </Row>
-                </Container>
-
-        }
+    {
+        post.imageLocation === null ? 
+        <Container>
+            <Row className="post-row">
+                <Col md={6} lg={4} key={post.id}>
+                    <Card className="post-card">
+                        <strong className="post-title">{post.title}</strong>
+                        <div>{post.content}</div>
+                        <div>Published: {formattedDate}</div>
+                        <div>{post.userProfile?.displayName}</div>
+                    </Card>
+                </Col>
+            </Row>
+            <Button tag={Link} to="edit">Edit Post</Button>
+            <Button onClick={handleDeleteButton}>Delete</Button>
+            <Link to={`/comment/${post.id}`}>View Comments</Link>
+        </Container> 
+        :
+        <Container>
+            <Row className="post-row">
+                <Col md={10} lg={14} key={post.id}>
+                    <Card className="post-card-details">
+                        <strong className="post-title">{post.title}</strong>
+                        <img src={post.imageLocation} alt="A placeholder picture that doesn't exist anymore"></img>
+                        <div>{post.content}</div>
+                        <div>Published: {formattedDate}</div>
+                        <div>by: {post.userProfile?.displayName}</div>
+                    </Card>
+                </Col>
+            </Row>
+        <Button tag={Link} to="edit">Edit Post</Button>
+        <Button onClick={handleDeleteButton}>Delete</Button>
+        <Link to={`/comment/${post.id}`}>View Comments</Link>
+        </Container>
+         
+    }  
     </> :
-        <>
-            {
-                post.imageLocation === null ?
-                    <Container>
-                        <Row className="post-row">
-                            <Col md={6} lg={4} key={post.id}>
-                                <Card className="post-card">
-                                    <strong className="post-title">{post.title}</strong>
-                                    <div>{post.content}</div>
-                                    <div>Published: {formattedDate}</div>
-                                    <div>{post.userProfile?.displayName}</div>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Container>
-                    :
-                    <Container>
-                        <Row className="post-row">
-                            <Col md={10} lg={14} key={post.id}>
-                                <Card className="post-card-details">
-                                    <strong className="post-title">{post.title}</strong>
-                                    <img src={post.imageLocation} alt="A placeholder picture that doesn't exist anymore"></img>
-                                    <div>{post.content}</div>
-                                    <div>Published: {formattedDate}</div>
-                                    <div>by: {post.userProfile?.displayName}</div>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Container>
-            }
-        </>
-
+     <>
+    {
+        post.imageLocation === null ? 
+        <Container>
+            <Row className="post-row">
+                <Col md={6} lg={4} key={post.id}>
+                    <Card className="post-card">
+                        <strong className="post-title">{post.title}</strong>
+                        <div>{post.content}</div>
+                        <div>Published: {formattedDate}</div>
+                        <div>{post.userProfile?.displayName}</div>
+                    </Card>
+                </Col>
+            </Row>
+            <Link to={`/comment/${post.id}`}>View Comments</Link>
+        </Container> 
+        :
+        <Container>
+            <Row className="post-row">
+                <Col md={10} lg={14} key={post.id}>
+                    <Card className="post-card-details">
+                        <strong className="post-title">{post.title}</strong>
+                        <img src={post.imageLocation} alt="A placeholder picture that doesn't exist anymore"></img>
+                        <div>{post.content}</div>
+                        <div>Published: {formattedDate}</div>
+                        <div>by: {post.userProfile?.displayName}</div>
+                        <Link to={`/comment/${post.id}`}>View Comments</Link>
+                    </Card>
+                </Col>
+            </Row>
+            
+        </Container> 
+    }  
+    </>
+    
 }
