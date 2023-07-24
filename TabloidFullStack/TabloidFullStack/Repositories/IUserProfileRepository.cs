@@ -7,6 +7,7 @@ namespace TabloidFullStack.Repositories
     {
         List<UserProfile> GetAll();
         UserProfile GetById(int id);
+        void Deactivate(int id);
        
     }
 }

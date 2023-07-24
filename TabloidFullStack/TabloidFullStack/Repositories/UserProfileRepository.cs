@@ -105,5 +105,27 @@ namespace TabloidFullStack.Repositories
             return userProfile;
         }
 
+
+        // deactivate userprofile 
+        public void Deactivate(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+
+                    cmd.CommandText = @"
+                        UPDATE UserProfile
+                        SET IsActive = 0
+                        WHERE Id = @Id";
+
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }
