@@ -42,3 +42,8 @@ export const editPost = (post) => {
             body: JSON.stringify(post)
     })
 }
+export const deletePost = (id) => {
+    return fetch(`${baseUrl}/${id}`, {
+        method: "DELETE",
+      }).then(getAllPosts)
+}
