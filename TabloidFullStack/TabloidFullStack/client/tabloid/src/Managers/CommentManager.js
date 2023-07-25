@@ -21,3 +21,10 @@ export const addComment = (commentObject) => {
         return res.json();
     });
 };
+
+
+export const deleteComment = (commentId) => {
+    return fetch(`/api/Comment/${commentId}`, {
+      method: "DELETE",
+    });
+  };
