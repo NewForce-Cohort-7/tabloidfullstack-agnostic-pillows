@@ -2,20 +2,26 @@ const apiUrl = "https://localhost:5001";
 
 export const login = (userObject) => {
   return fetch(`${apiUrl}/api/userprofile/getbyemail?email=${userObject.email}`)
-  .then((r) => r.json())
+    .then((r) => r.json())
     .then((userProfile) => {
-      if(userProfile.id){
+      if (userProfile && userProfile.id && userProfile.isActive) {
         localStorage.setItem("userProfile", JSON.stringify(userProfile));
-        return userProfile
+        return userProfile;
+      } else {
+        throw new Error("Invalid email or account deactivated");
       }
-      else{
-        return undefined
-      }
+    })
+    .catch((error) => {
+      throw new Error("Invalid email or account deactivated");
     });
 };
 
 export const logout = () => {
       localStorage.clear()
+};
+
+export const getUserStatus = (email) => {
+  return fetch(`${apiUrl}/api/UserProfile/GetByEmail?email=${email}`).then((res) => res.json());
 };
 
 export const register = (userObject, password) => {
@@ -42,6 +48,18 @@ export const getUserProfileById = (id) => {
   return fetch(`${apiUrl}/api/userprofile/${id}`)
   .then((response) => response.json())
 };
+
+export const deactivateUserProfile = (id) => {
+  return fetch(`${apiUrl}/api/userprofile/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ isActive: false }),
+  })
+}
+
+
 
 
 
