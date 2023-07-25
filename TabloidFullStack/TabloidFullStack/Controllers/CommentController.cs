@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TabloidFullStack.Models;
 using TabloidFullStack.Repositories;
 
 namespace TabloidFullStack.Controllers
@@ -17,7 +18,7 @@ namespace TabloidFullStack.Controllers
 
 
 
-        // http://localhost:5000/api/comment/5
+        // http://localhost:5000/api/comments/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
@@ -27,6 +28,15 @@ namespace TabloidFullStack.Controllers
                 return NotFound();
             }
             return Ok(category);
+        }
+
+
+        // http://localhost:5000/api/comment
+        [HttpPost]
+        public ActionResult Post(Comment comment)
+        {
+            _commentRepo.Add(comment);
+            return CreatedAtAction("Get", new { id = comment.Id }, comment);
         }
 
 
