@@ -68,8 +68,24 @@ export const reactivateUserProfile = (id) => {
     body: JSON.stringify({ isActive: true }),
   })
 }
-
-
+export const uploadUserProfileImage = (singleImage) => {
+  const formData = new FormData();
+  formData.append("image", singleImage)
+  return fetch(`${apiUrl}/api/UserProfile/upload-image`, {
+      method: "POST",
+      body: formData,
+  })
+}
+export const editUserProfile = (userProfile) => {
+  //make sure your parameter matches the one you are sending to the API
+  return fetch(`${apiUrl}/api/UserProfile/${userProfile.Id}`, {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userProfile)
+  })
+}
 
 
 // return (
