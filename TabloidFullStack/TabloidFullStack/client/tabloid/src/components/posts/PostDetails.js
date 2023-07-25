@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { deletePost, getPostById } from "../../Managers/PostManager";
+import { deletePost, getAllPosts, getPostById } from "../../Managers/PostManager";
 import { Button, Card, Col, Container, Row } from "reactstrap";
 
 export const PostDetails = () => {
@@ -23,6 +23,7 @@ export const PostDetails = () => {
         const results = (window.confirm('Are you sure you want to delete your post?'))
         if (results) {
             deletePost(post.id)
+                .then(getAllPosts())
                 .then(navigate(`/posts`))
         };
     };

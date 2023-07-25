@@ -22,28 +22,36 @@ export const addPost = (singlePost) => {
         },
         body: JSON.stringify(singlePost),
     })
-    .then((res) => {
-        if (!res.ok) {
-            throw new Error("Failed to create new Post")
-        }
-        return res.json();
-    })
-    .then((data) => {
-        return data.id;
-    });
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error("Failed to create new Post")
+            }
+            return res.json();
+        })
+        .then((data) => {
+            return data.id;
+        });
 };
 export const editPost = (post) => {
     //make sure your parameter matches the one you are sending to the API
     return fetch(`${baseUrl}/${post.Id}`, {
         method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(post)
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(post)
     })
 }
 export const deletePost = (id) => {
     return fetch(`${baseUrl}/${id}`, {
         method: "DELETE",
-      }).then(getAllPosts)
+    }).then(getAllPosts)
+}
+export const uploadPostImage = (singleImage) => {
+    const formData = new FormData();
+    formData.append("image", singleImage)
+    return fetch(`${baseUrl}/upload-image`, {
+        method: "POST",
+        body: formData,
+    })
 }
