@@ -40,8 +40,8 @@ export const PostDetails = () => {
                             </Card>
                             <Button className="post-button" tag={Link} to="edit">Edit Post</Button>
                             <Button className="post-button" onClick={handleDeleteButton}>Delete</Button>
-                            <Link to={`/comments/${post.id}`}>View Comments</Link>
-                            <Link to={`/comment/create/${post.id}`}>Add Comment</Link>
+                            <Button tag={Link} to={`/comments/${post.id}`} className="comment-btn">View Comments</Button>
+                            <Button tag={Link} to={`/comment/create/${post.id}`} className="comment-btn">Add Comment</Button>
                         </Col>
                     </Row>
                 </Container>
@@ -58,8 +58,8 @@ export const PostDetails = () => {
                             </Card>
                             <Button className="post-button" tag={Link} to="edit">Edit Post</Button>
                             <Button className="post-button" onClick={handleDeleteButton}>Delete</Button>
-                            <Link to={`/comments/${post.id}`}>View Comments</Link>
-                            <Link to={`/comment/create/${post.id}`}>Add Comment</Link>
+                            <Button tag={Link} to={`/comments/${post.id}`} className="comment-btn">View Comments</Button>
+                            <Button tag={Link} to={`/comment/create/${post.id}`} className="comment-btn">Add Comment</Button>
                         </Col>
                     </Row>
                 </Container>
@@ -78,8 +78,8 @@ export const PostDetails = () => {
                                     <div>Published: {formattedDate}</div>
                                     <div>{post.userProfile?.displayName}</div>
                                 </Card>
-                                <Link to={`/comments/${post.id}`}>View Comments</Link>
-                                <Link to={`/comment/create/${post.id}`}>Add Comment</Link>
+                            <Button tag={Link} to={`/comments/${post.id}`} className="comment-btn">View Comments</Button>
+                            <Button tag={Link} to={`/comment/create/${post.id}`} className="comment-btn">Add Comment</Button>
                             </Col>
                         </Row>
                     </Container>
@@ -94,8 +94,8 @@ export const PostDetails = () => {
                                     <div>Published: {formattedDate}</div>
                                     <div>by: {post.userProfile?.displayName}</div>
                                 </Card>
-                                <Link to={`/comments/${post.id}`}>View Comments</Link>
-                                <Link to={`/comment/create/${post.id}`}>Add Comment</Link>
+                            <Button tag={Link} to={`/comments/${post.id}`} className="comment-btn">View Comments</Button>
+                            <Button tag={Link} to={`/comment/create/${post.id}`} className="comment-btn">Add Comment</Button>
                             </Col>
                         </Row>
 

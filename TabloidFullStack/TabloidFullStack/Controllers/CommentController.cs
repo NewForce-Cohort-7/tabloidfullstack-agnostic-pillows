@@ -39,6 +39,14 @@ namespace TabloidFullStack.Controllers
             return CreatedAtAction("Get", new { id = comment.Id }, comment);
         }
 
+        // http://localhost:5000/api/comment/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _commentRepo.Delete(id);
+            return NoContent();
+        }
+
 
 
 
