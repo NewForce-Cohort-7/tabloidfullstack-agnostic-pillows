@@ -91,9 +91,9 @@ export const PostEdit = () => {
                     <Label htmlFor="imageLocation">Image Url:</Label>
                     <Input
                         className="post-input"
-                        type="text"
+                        type="file"
                         id="imageLocation"
-                        value={editedPost.imageLocation}
+                        value=""
                         onChange={
                             (event) => {
                                 const copy = { ...editedPost }

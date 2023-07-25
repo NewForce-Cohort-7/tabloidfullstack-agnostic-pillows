@@ -92,7 +92,7 @@ export const PostForm = () => {
                     <Label htmlFor="imageLocation">Image Url:</Label>
                     <Input
                         className="post-input"
-                        type="text"
+                        type="file"
                         id="imageLocation"
                         value={newPost.imageLocation}
                         onChange={
