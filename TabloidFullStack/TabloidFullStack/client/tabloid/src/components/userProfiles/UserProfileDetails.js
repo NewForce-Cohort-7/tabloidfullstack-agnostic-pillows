@@ -8,6 +8,9 @@ export const UserProfileDetails = () => {
     const [userProfile, setUserProfile] = useState({});
     const navigate = useNavigate();
 
+    const loggedInUser = JSON.parse(localStorage.getItem("userProfile"));
+    const isAdmin = loggedInUser?.userType?.id === 1;
+
     useEffect(() => {
         getUserProfileById(id)
             .then(userProfileFromAPI => {
@@ -31,7 +34,9 @@ export const UserProfileDetails = () => {
                             <CardSubtitle tag ="h6" className="mb-2">Creation Date: {
                                 new Date(userProfile.createDateTime).toLocaleDateString('en-US')
                             }</CardSubtitle>
+                            {isAdmin && (
                             <CardSubtitle tag="h6" className="mb-2">Account Status: {userProfile.isActive ? "Active" : "Deactivated"}</CardSubtitle>
+                            )}
                         </CardBody>
                     </Card>
                 </Col>

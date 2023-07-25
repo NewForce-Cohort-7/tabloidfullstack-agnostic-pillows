@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { getAllUserProfiles } from "../../Managers/UserProfileManager";
 import { Card, Col, Container, Row } from "reactstrap";
 import { UserProfile } from "./UserProfile";
+import { UserProfileDetails } from "./UserProfileDetails";
 import { deactivateUserProfile } from "../../Managers/UserProfileManager";
+import { reactivateUserProfile } from "../../Managers/UserProfileManager";
 
 export const UserProfileList = () => {
   const [userProfiles, setUserProfiles] = useState([]);
@@ -22,6 +24,19 @@ export const UserProfileList = () => {
     if (window.confirm("Are you sure you want to deactivate this user?")) {
       deactivateUserProfile(userId).then(() => {
         // after deactivating, fetch all user profiles again and update the state
+        getAllUserProfiles().then((userProfiles) => {
+          const sortedUserProfiles = sortUserProfilesByActivation(userProfiles);
+          setUserProfiles(sortedUserProfiles);
+        });
+      });
+    }
+  };
+
+  // this handles the reactivation of a user 
+  const handleReactivateUser = (userId) => {
+    if (window.confirm("Are you sure you want to reactivate this user?")) {
+      reactivateUserProfile(userId).then(() => {
+        // after reactivating, fetch all user profiles again and update the state
         getAllUserProfiles().then((userProfiles) => {
           const sortedUserProfiles = sortUserProfilesByActivation(userProfiles);
           setUserProfiles(sortedUserProfiles);
@@ -55,6 +70,7 @@ export const UserProfileList = () => {
               userProfileProp={userProfile}
               isAdmin={isAdmin}
               handleDeactivateUser={handleDeactivateUser}
+              handleReactivateUser={handleReactivateUser}
             />
           </Col>
         ))}
