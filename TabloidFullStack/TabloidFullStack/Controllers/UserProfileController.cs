@@ -63,7 +63,7 @@ namespace TabloidFullStack.Controllers
         }
 
         // PATCH api/<UserProfileController>/5
-        [HttpPatch("{id}")]
+        [HttpPatch("Deactivate/{id}")]
         public IActionResult Deactivate(int id)
         {
             // Check if the user profile exists
@@ -75,6 +75,23 @@ namespace TabloidFullStack.Controllers
 
             // Deactivate the user profile
             _userProfileRepository.DeactivateUserProfile(id);
+
+            return NoContent();
+        }
+
+        // PATCH api/<UserProfileController>/5
+        [HttpPatch("Reactivate/{id}")]
+        public IActionResult Reactivate(int id)
+        {
+            // Check if the user profile exists
+            UserProfile userProfile = _userProfileRepository.GetById(id);
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+
+            // Reactivate the user profile
+            _userProfileRepository.ReactivateUserProfile(id);
 
             return NoContent();
         }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardBody, Button } from "reactstrap";
 import { getAllUserProfiles } from "../../Managers/UserProfileManager";
 
-export const UserProfile = ({ userProfileProp, isAdmin, handleDeactivateUser }) => {
+export const UserProfile = ({ userProfileProp, isAdmin, handleDeactivateUser, handleReactivateUser }) => {
   const [userProfiles, setUserProfiles] = useState([]);
 
   useEffect(() => {
@@ -35,12 +35,20 @@ export const UserProfile = ({ userProfileProp, isAdmin, handleDeactivateUser }) 
         </div>
       </CardBody>
       {isAdmin && (
+        <>
+        <Button 
+          color="success" 
+          className="mb-2"
+          onClick={() => handleReactivateUser(userProfileProp.id)}>
+          Reactivate
+        </Button>
         <Button
           color="danger"
           onClick={() => handleDeactivateUser(userProfileProp.id)}
         >
           Deactivate
         </Button>
+        </>
       )}
     </Card>
   );
