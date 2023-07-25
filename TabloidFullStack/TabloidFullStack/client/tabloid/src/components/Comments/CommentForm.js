@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { Button, FormGroup, Input, Label } from "reactstrap"
 import { addComment } from "../../Managers/CommentManager.js"
+import './Comment.css';
 
 export const CommentForm = () => {
 
@@ -44,6 +45,8 @@ export const CommentForm = () => {
             }
         });
     };
+
+    
 
     return (
         <form className="comment-form">
