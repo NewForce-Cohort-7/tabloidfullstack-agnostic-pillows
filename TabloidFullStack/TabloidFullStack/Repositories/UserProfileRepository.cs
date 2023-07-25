@@ -127,7 +127,31 @@ namespace TabloidFullStack.Repositories
                 }
             }
 
-
             }
+
+        // reactivate profile by Id/isActive boolean
+        public void ReactivateUserProfile(int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE UserProfile
+                        SET IsActive = 1
+                        WHERE Id = @Id
+                    ";
+
+                    DbUtils.AddParameter(cmd, "@Id", userId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+
         }
+        
     }
+    
+}
