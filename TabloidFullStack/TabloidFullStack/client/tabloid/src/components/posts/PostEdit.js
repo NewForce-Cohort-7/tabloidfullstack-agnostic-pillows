@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { editPost, getPostById } from "../../Managers/PostManager";
+import { editPost, getPostById, uploadPostImage } from "../../Managers/PostManager";
 import { useNavigate, useParams } from "react-router-dom";
 import { CategoryContext } from "../../Managers/CategoryManager";
 import { Button, FormGroup, Input, Label } from "reactstrap";
@@ -9,7 +9,8 @@ export const PostEdit = () => {
     const tabloidUserObject = JSON.parse(localTabloidUser)
     const { postId } = useParams();
     const navigate = useNavigate();
-    const { getAllCategories, categories } = useContext(CategoryContext)
+    const { getAllCategories, categories } = useContext(CategoryContext);
+    const [selectedImage, setSelectedImage] = useState(null);
     
     useEffect(() => {
         getAllCategories()
@@ -53,6 +54,26 @@ export const PostEdit = () => {
                 navigate(`/posts/${editedPost.id}`)
             })
     }
+    const handleImageChange = async (e) => {
+        const file = e.target.files[0];
+
+        try {
+            const res = await uploadPostImage(file);
+            const data = await res.json();
+            if (data.imageUrl) {
+                const copy = {...editedPost}
+                copy.imageLocation = data.imageUrl
+                setEditedPost(copy);
+            }
+            else {
+                alert("Image Upload Failed")
+            }
+        } catch (error) {
+            console.error("Error uploading image: ", error);
+            alert("An error occured during the image upload");
+        }
+    };
+
 
     return (
         <form className="post-form">
@@ -91,16 +112,10 @@ export const PostEdit = () => {
                     <Label htmlFor="imageLocation">Image Url:</Label>
                     <Input
                         className="post-input"
-                        type="text"
+                        type="file"
                         id="imageLocation"
-                        value={editedPost.imageLocation}
-                        onChange={
-                            (event) => {
-                                const copy = { ...editedPost }
-                                copy.imageLocation = event.target.value
-                                setEditedPost(copy)
-                            }
-                        } />
+                        onChange={handleImageChange} />
+                        {selectedImage && <p>Selected Image: {selectedImage}</p>}
                 </FormGroup>
                 <FormGroup>
                     <Label for="categoryDropdown">Select Category:</Label>

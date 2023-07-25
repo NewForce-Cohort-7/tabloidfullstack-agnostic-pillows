@@ -40,6 +40,8 @@ namespace TabloidFullStack
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+
             app.UseAuthorization();
 
 
