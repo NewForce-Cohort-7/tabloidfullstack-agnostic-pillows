@@ -50,7 +50,7 @@ export const getUserProfileById = (id) => {
 };
 
 export const deactivateUserProfile = (id) => {
-  return fetch(`${apiUrl}/api/userprofile/${id}`, {
+  return fetch(`${apiUrl}/api/userprofile/deactivate/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -59,6 +59,15 @@ export const deactivateUserProfile = (id) => {
   })
 }
 
+export const reactivateUserProfile = (id) => {
+  return fetch(`${apiUrl}/api/userprofile/reactivate/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ isActive: true }),
+  })
+}
 
 
 
