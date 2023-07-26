@@ -30,10 +30,10 @@ export const UserProfileEdit = ({ userProfileProp, setUserProfile, setShowEdit, 
             userTypeId: userProfileProp.userProfileId,
             isActive: userProfileProp.isActive
         }
-        return editUserProfile(userProfileToEdit)
+        editUserProfile(userProfileToEdit)
             .then(() => getUserProfileById(userProfileProp.id))
-            .then((updatedProfile) => setUserProfile(updatedProfile))
-            .then(() => setShowEdit(false))
+            .then((updatedProfile) => setUserProfile(updatedProfile));
+            setShowEdit(false)
     }
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
