@@ -22,13 +22,27 @@ namespace TabloidFullStack.Controllers
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            var category = _commentRepo.GetAllByPostId(id);
-            if (category == null)
+            var comment = _commentRepo.GetAllByPostId(id);
+            if (comment == null)
             {
                 return NotFound();
             }
-            return Ok(category);
+            return Ok(comment);
         }
+
+        [HttpGet("commentById/{id}")]
+        public IActionResult GetById(int id)
+        {
+            Comment comment = _commentRepo.GetCommentById(id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return Ok(comment);
+        }
+
+
+
 
 
         // http://localhost:5000/api/comment
@@ -46,6 +60,20 @@ namespace TabloidFullStack.Controllers
             _commentRepo.Delete(id);
             return NoContent();
         }
+
+
+        // http://localhost:5000/api/comment/5
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Comment comment)
+        {
+            if (id != comment.Id)
+            {
+                return BadRequest();
+            }
+            _commentRepo.Update(comment);
+            return NoContent();
+        }
+
 
 
 
