@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { editUserProfile, uploadUserProfileImage } from "../../Managers/UserProfileManager";
+import { editUserProfile, getUserProfileById, uploadUserProfileImage } from "../../Managers/UserProfileManager";
 import { Button, CardBody, CardSubtitle, CardTitle, FormGroup, Input, Label } from "reactstrap";
+import { useParams } from "react-router-dom";
 
 export const UserProfileEdit = ({ userProfileProp, setUserProfile, setShowEdit, isAdmin }) => {
     const [editedUserProfile, setEditedUserProfile] = useState({
@@ -10,8 +11,8 @@ export const UserProfileEdit = ({ userProfileProp, setUserProfile, setShowEdit, 
         email: "",
         createDateTime: Date.now(),
         imageLocation: "",
-        userTypeId: "",
-        isActive: ""
+        userTypeId: null,
+        isActive: null
     })
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -30,7 +31,8 @@ export const UserProfileEdit = ({ userProfileProp, setUserProfile, setShowEdit, 
             isActive: userProfileProp.isActive
         }
         return editUserProfile(userProfileToEdit)
-            .then((updatedUserProfile) => setUserProfile(updatedUserProfile))
+            .then(() => getUserProfileById(userProfileProp.id))
+            .then((updatedProfile) => setUserProfile(updatedProfile))
             .then(() => setShowEdit(false))
     }
     const handleImageChange = async (e) => {

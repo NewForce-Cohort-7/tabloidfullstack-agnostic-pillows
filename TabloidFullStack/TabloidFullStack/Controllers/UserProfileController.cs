@@ -102,7 +102,7 @@ namespace TabloidFullStack.Controllers
             {
                 return BadRequest();
             }
-            _userProfileRepository.Update(userProfile);
+            _userProfileRepository.UpdateProfileImage(userProfile);
             return NoContent();
         }
         [HttpPost("upload-image")]
