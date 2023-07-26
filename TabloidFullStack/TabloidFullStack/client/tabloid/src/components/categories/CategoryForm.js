@@ -30,6 +30,10 @@ const CategoryForm = () => {
         setCategory(stateToChange);
     };
 
+    const handleCancel = () => {
+        navigate("/categories");
+    }
+
     return (
         <Form onSubmit={handleSubmit}>
             <h2>Create Category</h2>
@@ -38,6 +42,7 @@ const CategoryForm = () => {
                 <Input type="text" id="name" onChange={handleFieldChange} value={category.name} required />
             </FormGroup>
             <Button type="submit">Save</Button>
+            <Button onClick={handleCancel}>Cancel</Button>
         </Form>
     );
 }

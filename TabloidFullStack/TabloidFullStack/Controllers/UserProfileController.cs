@@ -118,6 +118,8 @@ namespace TabloidFullStack.Controllers
 
             return NoContent();
         }
+
+
         [HttpPut("{id}")]
         public IActionResult Put(int id, UserProfile userProfile)
         {
