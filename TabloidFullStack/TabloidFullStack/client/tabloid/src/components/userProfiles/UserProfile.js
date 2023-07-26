@@ -44,10 +44,14 @@ export const UserProfile = ({ userProfileProp, isAdmin, handleDeactivateUser, ha
         </Button>
         <Button
           color="danger"
+          className="mb-2"
           onClick={() => handleDeactivateUser(userProfileProp.id)}
         >
           Deactivate
         </Button>
+        <Link to={`/userprofiles/edit/${userProfileProp.id}`} className="btn btn-info">
+          Edit
+        </Link>
         </>
       )}
     </Card>

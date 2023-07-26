@@ -5,6 +5,7 @@ import { UserProfile } from "./UserProfile";
 import { UserProfileDetails } from "./UserProfileDetails";
 import { deactivateUserProfile } from "../../Managers/UserProfileManager";
 import { reactivateUserProfile } from "../../Managers/UserProfileManager";
+import { updateUserType } from "../../Managers/UserProfileManager";
 
 export const UserProfileList = () => {
   const [userProfiles, setUserProfiles] = useState([]);
@@ -18,6 +19,17 @@ export const UserProfileList = () => {
 
   const loggedInUser = JSON.parse(localStorage.getItem("userProfile"));
   const isAdmin = loggedInUser?.userType?.id === 1;
+
+  // this handles updating the user type of a user
+  const handleUpdateUserType = (userId, userTypeId) => {
+    updateUserType(userId, userTypeId).then(() => {
+      // after updating, fetch all user profiles again and update the state
+      getAllUserProfiles().then((userProfiles) => {
+        const sortedUserProfiles = sortUserProfilesByActivation(userProfiles);
+        setUserProfiles(sortedUserProfiles);
+      });
+    });
+  };
 
   // this handles the deactivation of a user
   const handleDeactivateUser = (userId) => {

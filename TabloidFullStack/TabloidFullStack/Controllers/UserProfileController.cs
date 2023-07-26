@@ -62,6 +62,29 @@ namespace TabloidFullStack.Controllers
             return CreatedAtAction("GetByEmail", new { email = userProfile.Email }, userProfile);
         }
 
+        // Get all User Types/Names 
+        [HttpGet("GetUserTypes")]
+        public IActionResult GetUserTypes()
+        {
+            return Ok(_userRepository.GetUserTypes());
+        }
+
+        // Update User Type
+        [HttpPatch("UpdateUserType/{id}")]
+        public IActionResult UpdateUserType(int id, [FromBody] int userTypeId)
+        {
+            // Check if the user profile exists
+            UserProfile userProfile = _userProfileRepository.GetById(id);
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+
+            _userRepository.UpdateUserType(id, userTypeId);
+            return NoContent();
+        }
+
+
         // PATCH api/<UserProfileController>/5
         [HttpPatch("Deactivate/{id}")]
         public IActionResult Deactivate(int id)
