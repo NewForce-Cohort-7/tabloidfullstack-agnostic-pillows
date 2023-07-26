@@ -16,6 +16,7 @@ import { PostEdit } from "./posts/PostEdit";
 import { CommentList } from "./Comments/CommentList.js";
 import { CommentForm } from "./Comments/CommentForm.js";
 import { CommentEdit } from "./Comments/CommentEdit.js";
+import { EditUserProfile } from "./userProfiles/EditUserProfile";
 
 
 
@@ -36,6 +37,7 @@ export default function ApplicationViews() {
         <Route path="/categories/:categoryId/edit" element={<EditCategoryForm />} />
         <Route path="users" element={<UserProfileList />} />
         <Route path="userprofiles/:id" element={<UserProfileDetails />} />
+        <Route path="/userprofiles/edit/:id" element={<EditUserProfile />} />
         <Route path="comments/:id" element={<CommentList />} />
         <Route path="comment/create/:postId" element={<CommentForm />} />
         <Route path="comment/edit/:commentId" element={<CommentEdit/>} />

@@ -49,6 +49,23 @@ export const getUserProfileById = (id) => {
   .then((response) => response.json())
 };
 
+// grab user types 
+export const getAllUserTypes = () => {
+  return fetch(`${apiUrl}/api/UserProfile/GetUserTypes`)
+  .then((response) => response.json())
+};
+
+// update user type 
+export const updateUserType = (id, userTypeId) => {
+  return fetch(`/api/userprofile/UpdateUserType/${id}`, {
+      method: "PATCH",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userTypeId)
+  })
+}
+
 export const deactivateUserProfile = (id) => {
   return fetch(`${apiUrl}/api/userprofile/deactivate/${id}`, {
     method: "PATCH",

@@ -78,5 +78,58 @@ namespace TabloidFullStack.Repositories
                 }
             }
         }
+
+        public List<UserType> GetUserTypes()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id, Name FROM UserType";
+
+                    var reader = cmd.ExecuteReader();
+
+                    var userTypes = new List<UserType>();
+                    while (reader.Read())
+                    {
+                        var userType = new UserType()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "Name")
+                        };
+
+                        userTypes.Add(userType);
+                    }
+
+                    reader.Close();
+                    return userTypes;
+                }
+            }
+        }
+
+        // edit a user profile's user type 
+        public void UpdateUserType(int userId, int userTypeId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+
+                        UPDATE UserProfile
+                        SET UserTypeId = @userTypeId
+                        WHERE Id = @Id
+                    ";
+
+                    DbUtils.AddParameter(cmd, "@Id", userId);
+                    DbUtils.AddParameter(cmd, "@userTypeId", userTypeId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

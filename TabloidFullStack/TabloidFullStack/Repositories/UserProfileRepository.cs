@@ -107,6 +107,7 @@ namespace TabloidFullStack.Repositories
             return userProfile;
         }
 
+
         // deactivate profile by Id/isActive boolean
         public void DeactivateUserProfile(int userId)
         {

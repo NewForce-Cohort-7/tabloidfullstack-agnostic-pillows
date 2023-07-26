@@ -56,7 +56,7 @@ const EditCategoryForm = () => {
                 <Label for="name">Category Name:</Label>
                 <Input type="text" id="name" onChange={handleFieldChange} value={category.name} required />
             </FormGroup>
-            <Button type="submit">Save</Button>
+            <Button type="submit" className="me-2">Save</Button>
             <Button onClick={handleCancel}>Cancel</Button>
         </Form>
     );
