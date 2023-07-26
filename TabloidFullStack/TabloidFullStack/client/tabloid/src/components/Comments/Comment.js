@@ -1,7 +1,6 @@
 import { CardBody, Button } from "reactstrap"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { deleteComment, getCommentsByPostId } from "../../Managers/CommentManager.js";
-import { useParams } from "react-router-dom";
 
 export const Comment = ({ commentProp, getComments}) => {
 
@@ -41,7 +40,11 @@ export const Comment = ({ commentProp, getComments}) => {
                 <div> {commentProp.content}</div>
 
                 {(tabloidUserObject.id === commentProp.userProfileId) ? 
-                    <Button color="danger" onClick={handleDeleteButton}>Delete</Button> 
+                <>
+                <Button color="danger" onClick={handleDeleteButton}>Delete</Button> 
+                <Button tag={Link} to={`/comment/edit/${commentProp.id}`} className="comment-btn">Edit</Button>
+                </>
+
                     : <></>}
             </div>
         </CardBody>

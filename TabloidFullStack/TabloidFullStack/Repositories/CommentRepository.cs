@@ -111,6 +111,90 @@ namespace TabloidFullStack.Repositories
 
 
 
+        public void Update(Comment comment)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Comment
+                        SET
+                        [PostId] = @postId,
+                         [UserProfileId] = @userProfileId,
+                         [Subject] = @subject,
+                         [Content] = @content,
+                         [CreateDateTime] = @createDateTime
+                        WHERE Id = @id
+                        ";
+                    cmd.Parameters.AddWithValue("@id", comment.Id);
+                    cmd.Parameters.AddWithValue("@postId", comment.PostId);
+                    cmd.Parameters.AddWithValue("@userProfileId", comment.UserProfileId);
+                    cmd.Parameters.AddWithValue("@subject", comment.Subject);
+                    cmd.Parameters.AddWithValue("@content", comment.Content);
+                    cmd.Parameters.AddWithValue("@createDateTime", comment.CreateDateTime);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public Comment GetCommentById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT c.Id, c.PostId, c.UserProfileId, c.Subject, c.Content, c.CreateDateTime,
+                        p.Title AS PostTitle, p.Content AS PostContent, p.ImageLocation AS PostImageLocation,
+                        u.DisplayName AS UserProfileDisplayName
+                        FROM Comment c
+                        LEFT JOIN Post p ON c.PostId = p.Id
+                        LEFT JOIN UserProfile u ON c.UserProfileId = u.Id
+                        WHERE c.Id = @commentId";
+
+                    cmd.Parameters.AddWithValue("@commentId", id);
+                    var reader = cmd.ExecuteReader();
+
+                    Comment comment = null;
+
+                    if (reader.Read())
+                    {
+                        comment = new Comment();
+
+                        comment.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+                        comment.PostId = reader.GetInt32(reader.GetOrdinal("PostId"));
+                        comment.UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId"));
+                        comment.Subject = reader.GetString(reader.GetOrdinal("Subject"));
+                        comment.Content = reader.GetString(reader.GetOrdinal("Content"));
+                        comment.CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime"));
+
+                        comment.Post = new Post
+                        {
+                            Title = reader.GetString(reader.GetOrdinal("PostTitle")),
+                            Content = reader.GetString(reader.GetOrdinal("PostContent")),
+                            ImageLocation = reader.GetString(reader.GetOrdinal("PostImageLocation"))
+                        };
+
+                        comment.UserProfile = new UserProfile
+                        {
+                            DisplayName = reader.GetString(reader.GetOrdinal("UserProfileDisplayName"))
+                        };
+                    }
+
+                    reader.Close();
+
+                    return comment;
+                }
+            }
+        }
+
+
+
 
 
 
