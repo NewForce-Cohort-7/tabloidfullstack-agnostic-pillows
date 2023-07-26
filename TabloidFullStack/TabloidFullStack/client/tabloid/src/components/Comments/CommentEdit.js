@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { editComment, getCommentById } from "../../Managers/CommentManager.js";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { Button, FormGroup, Input, Label } from "reactstrap";
 
 export const CommentEdit = () => {
@@ -85,8 +85,8 @@ export const CommentEdit = () => {
                 </FormGroup>
 
 
-            <Button
-                onClick={(clickEvent) => handleSaveButtonClick(clickEvent)} className="btn btn-primary">Save Comment</Button>
+            <Button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)} className="btn btn-primary">Save Comment</Button>
+            <Button tag={Link} to={`/comments/${editedComment.postId}`} className="comment-btn">Cancel</Button>
         </form>
     );
 }
