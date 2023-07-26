@@ -9,5 +9,6 @@ namespace TabloidFullStack.Repositories
         UserProfile GetById(int id);
         void DeactivateUserProfile(int userId);
         void ReactivateUserProfile(int userId);
+        void UpdateProfileImage(UserProfile userProfile);
     }
 }

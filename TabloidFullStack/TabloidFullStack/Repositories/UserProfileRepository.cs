@@ -151,6 +151,27 @@ namespace TabloidFullStack.Repositories
 
 
         }
+        public void UpdateProfileImage(UserProfile userProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE UserProfile
+                       SET
+                        [ImageLocation] = @imageLocation
+                        WHERE Id = @Id
+                        ";
+                    cmd.Parameters.AddWithValue("@Id", userProfile.Id);
+                    cmd.Parameters.AddWithValue("@imageLocation", userProfile.ImageLocation);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
         
     }
     
